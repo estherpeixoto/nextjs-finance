@@ -54,8 +54,8 @@ export default function Home() {
   return (
     <div className="min-w-[40rem] space-y-12">
       <div className="flex justify-between items-center">
-        <h2 className="font-semibold text-2xl">
-          {`${date.toLocaleString('default', { month: 'long' })}, ${date.getFullYear()}`}
+        <h2 className="font-semibold text-2xl capitalize">
+          {`${new Intl.DateTimeFormat('en-US', { month: 'long' }).format(date)}, ${date.getFullYear()}`}
         </h2>
 
         <span className="text-base">Monthly expense: $ 150.00</span>
