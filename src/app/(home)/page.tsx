@@ -76,7 +76,9 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-7 gap-2">
-          <div className={twMerge('', `col-span-${monthStartAt}`)} />
+          {Array.from({ length: monthStartAt }, (_, index) => {
+            return <div key={index} />
+          })}
 
           {monthDays.map(day => {
             return (
