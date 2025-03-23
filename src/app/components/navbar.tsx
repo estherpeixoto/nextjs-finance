@@ -87,10 +87,7 @@ export function Navbar() {
           Add subscription
         </DialogTitle>
 
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col gap-8 mb-8"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8">
           <Field>
             <Label passive={true} className="block mb-1 text-gray-900 text-sm">
               Description
@@ -110,25 +107,6 @@ export function Navbar() {
             <p className="mt-2 text-red-500 text-xs">
               {errors.description?.message}
             </p>
-          </Field>
-
-          <Field>
-            <Label passive={true} className="block mb-1 text-gray-900 text-sm">
-              Plan
-            </Label>
-
-            <Description className="text-gray-500 text-xs">
-              Enter the subscription plan (e.g., Standard)
-            </Description>
-
-            <div className="flex items-center bg-white mt-2 pl-3 rounded-md outline-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:outline-blue-600 -outline-offset-1 has-[input:focus-within]:-outline-offset-2">
-              <Input
-                {...register('plan')}
-                className="block py-1.5 pr-3 pl-1 focus:outline-none min-w-0 text-gray-900 placeholder:text-gray-400 sm:text-sm/6 text-base grow"
-              />
-            </div>
-
-            <p className="mt-2 text-red-500 text-xs">{errors.plan?.message}</p>
           </Field>
 
           <Field>
