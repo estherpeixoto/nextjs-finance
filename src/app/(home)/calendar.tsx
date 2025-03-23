@@ -51,21 +51,19 @@ export function Calendar({ date }: { date: Date }) {
 
   return (
     <>
-      <div className="space-y-2">
-        <div className="grid grid-cols-7 gap-1 sm:gap-2">
+      <div>
+        <div className="grid grid-cols-7 border-gray-200 border-t divide-x divide-y divide-gray-200">
           {weekday.map(day => {
             return (
               <div
-                className="uppercase text-xs px-4 py-2 bg-zinc-700 text-zinc-200 rounded sm:rounded-full flex items-center justify-center"
+                className="flex justify-center items-center bg-white px-4 py-2 text-gray-900 text-xs uppercase"
                 key={day.number}
               >
                 {day.name.substring(0, 3)}
               </div>
             )
           })}
-        </div>
 
-        <div className="grid grid-cols-7 gap-1 sm:gap-2">
           {Array.from({ length: monthStartAt }, (_, index) => {
             const key = `space-${index}`
             return <div key={key} />
@@ -77,7 +75,7 @@ export function Calendar({ date }: { date: Date }) {
                 key={day.number}
                 onClick={() => openModal(day.number)}
                 type="button"
-                className="relative uppercase min-h-20 bg-zinc-800 text-zinc-50 rounded sm:rounded-xl flex items-center justify-center cursor-pointer"
+                className="relative flex justify-center items-center bg-white min-h-20 text-gray-900 uppercase cursor-pointer"
               >
                 <Image
                   src={netflixLogo}
@@ -87,19 +85,21 @@ export function Calendar({ date }: { date: Date }) {
                   className="-mt-4"
                 />
 
-                <span className="absolute bottom-2 text-sm">{day.number}</span>
-                <span className="absolute top-2 right-2 rounded-full size-2 bg-zinc-700" />
+                <span className="bottom-2 absolute text-sm">{day.number}</span>
+                <span className="top-2 right-2 absolute bg-gray-300 rounded-full size-2" />
               </Button>
             )
+          })}
+
+          {Array.from({ length: monthStartAt }, (_, index) => {
+            const key = `space-${index}`
+            return <div key={key} />
           })}
         </div>
       </div>
 
       <Modal open={open} setOpen={setOpen}>
-        <DialogTitle
-          as="h3"
-          className="text-center font-semibold text-zinc-50 mb-8"
-        >
+        <DialogTitle as="h3" className="mb-8 text-gray-900 text-center">
           {date.toLocaleDateString('en-US', {
             weekday: 'short',
             month: 'long',
@@ -109,19 +109,16 @@ export function Calendar({ date }: { date: Date }) {
         </DialogTitle>
 
         <div className="flex flex-col gap-2 mb-8">
-          <Button
-            onClick={() => {}}
-            className="flex items-center rounded-xl p-3 bg-zinc-900/60 hover:bg-zinc-950/50 transition-colors cursor-pointer"
-          >
+          <Button className="flex items-center bg-white p-3 rounded-xl outline outline-gray-300 hover:outline-2 hover:outline-blue-600 transition-colors cursor-pointer">
             <Image src={netflixLogo} width={24} height={24} alt="Logo" />
 
-            <span className="text-zinc-200 ms-2">Netflix</span>
+            <span className="ms-2 text-gray-900">Netflix</span>
 
-            <span className="text-zinc-400 text-sm ms-auto">R$ 39,90</span>
+            <span className="ms-auto text-gray-500 text-sm">R$ 39,90</span>
           </Button>
         </div>
 
-        <p className="text-center text-sm text-zinc-500">Total: R$ 100,00</p>
+        <p className="text-gray-500 text-sm text-center">Total: R$ 100,00</p>
       </Modal>
     </>
   )

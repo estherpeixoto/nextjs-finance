@@ -70,21 +70,20 @@ export function Navbar() {
   const onSubmit = (data: FormData) => console.log(data)
 
   return (
-    <nav className="px-2 md:max-w-[767px] md:mx-auto sm:px-4 py-6 flex justify-between items-center">
-      <h1 className="text-2xl text-zinc-50">Calendar</h1>
+    <nav className="flex justify-between items-center bg-gray-50 px-6 py-4">
+      <h1 className="text-gray-900">
+        {`${(new Date()).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}`}
+      </h1>
 
       <Button
         onClick={() => setOpen(true)}
-        className="rounded-full bg-zinc-700 text-zinc-50 p-2 hover:bg-zinc-800 transition-colors cursor-pointer"
+        className="bg-white shadow p-2 border border-gray-300 rounded-md text-gray-400 hover:text-gray-500 cursor-pointer"
       >
-        <PlusIcon width={24} height={24} />
+        <PlusIcon width={20} height={20} />
       </Button>
 
       <Modal open={open} setOpen={setOpen}>
-        <DialogTitle
-          as="h3"
-          className="text-center font-semibold text-zinc-50 mb-8"
-        >
+        <DialogTitle as="h3" className="mb-8 text-gray-900 text-center">
           Add subscription
         </DialogTitle>
 
@@ -93,61 +92,71 @@ export function Navbar() {
           className="flex flex-col gap-8 mb-8"
         >
           <Field>
-            <Label className="text-sm/6 font-medium text-white">
+            <Label passive={true} className="block mb-1 text-gray-900 text-sm">
               Description
             </Label>
 
-            <Description className="text-sm/6 text-white/50">
+            <Description className="text-gray-500 text-xs">
               Enter the subscription name (e.g., Spotify)
             </Description>
 
-            <Input
-              {...register('description')}
-              className="mt-3 block w-full rounded-lg border-none bg-zinc-700/50 py-1.5 px-3 text-sm/6 text-white focus:outline-2 focus:outline-offset-2 focus:outline-white/25"
-            />
+            <div className="flex items-center bg-white mt-2 pl-3 rounded-md outline-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:outline-blue-600 -outline-offset-1 has-[input:focus-within]:-outline-offset-2">
+              <Input
+                {...register('description')}
+                className="block py-1.5 pr-3 pl-1 focus:outline-none min-w-0 text-gray-900 placeholder:text-gray-400 sm:text-sm/6 text-base grow"
+              />
+            </div>
 
-            <p className="text-xs text-red-400 mt-2">
+            <p className="mt-2 text-red-500 text-xs">
               {errors.description?.message}
             </p>
           </Field>
 
           <Field>
-            <Label className="text-sm/6 font-medium text-white">Plan</Label>
+            <Label passive={true} className="block mb-1 text-gray-900 text-sm">
+              Plan
+            </Label>
 
-            <Description className="text-sm/6 text-white/50">
+            <Description className="text-gray-500 text-xs">
               Enter the subscription plan (e.g., Standard)
             </Description>
 
-            <Input
-              {...register('plan')}
-              className="mt-3 block w-full rounded-lg border-none bg-zinc-700/50 py-1.5 px-3 text-sm/6 text-white focus:outline-2 focus:outline-offset-2 focus:outline-white/25"
-            />
+            <div className="flex items-center bg-white mt-2 pl-3 rounded-md outline-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:outline-blue-600 -outline-offset-1 has-[input:focus-within]:-outline-offset-2">
+              <Input
+                {...register('plan')}
+                className="block py-1.5 pr-3 pl-1 focus:outline-none min-w-0 text-gray-900 placeholder:text-gray-400 sm:text-sm/6 text-base grow"
+              />
+            </div>
 
-            <p className="text-xs text-red-400 mt-2">{errors.plan?.message}</p>
+            <p className="mt-2 text-red-500 text-xs">{errors.plan?.message}</p>
           </Field>
 
           <Field>
-            <Label className="text-sm/6 font-medium text-white">Price</Label>
+            <Label passive={true} className="block text-gray-900 text-sm">
+              Price
+            </Label>
 
-            <Input
-              {...register('price')}
-              placeholder="$"
-              className="mt-3 block w-full rounded-lg border-none bg-zinc-700/50 py-1.5 px-3 text-sm/6 text-white focus:outline-2 focus:outline-offset-2 focus:outline-white/25"
-            />
+            <div className="flex items-center bg-white mt-2 pl-3 rounded-md outline-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:outline-blue-600 -outline-offset-1 has-[input:focus-within]:-outline-offset-2">
+              <Input
+                {...register('price')}
+                placeholder="$"
+                className="block py-1.5 pr-3 pl-1 focus:outline-none min-w-0 text-gray-900 placeholder:text-gray-400 sm:text-sm/6 text-base grow"
+              />
+            </div>
 
-            <p className="text-xs text-red-400 mt-2">{errors.price?.message}</p>
+            <p className="mt-2 text-red-500 text-xs">{errors.price?.message}</p>
           </Field>
 
           <Field>
-            <Label className="text-sm/6 font-medium text-white">
+            <Label passive={true} className="block mb-1 text-gray-900 text-sm">
               Credit card
             </Label>
 
-            <Description className="text-sm/6 text-white/50">
+            <Description className="text-gray-500 text-xs">
               Enter the last 4 digits of the credit card used
             </Description>
 
-            <div className="mt-3 flex divide-x divide-zinc-700">
+            <div className="flex items-center bg-white mt-2 rounded-md outline-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:outline-blue-600 -outline-offset-1 has-[input:focus-within]:-outline-offset-2">
               <Controller
                 control={control}
                 name="flag"
@@ -158,7 +167,7 @@ export function Navbar() {
                     value={value}
                     as="div"
                   >
-                    <ListboxButton className="relative block w-[80px] rounded-l-lg bg-zinc-700/50 p-3">
+                    <ListboxButton className="block relative p-3 rounded-l-md outline-gray-300 data-[active]:outline-2 data-[active]:outline-blue-600 -outline-offset-1 data-[active]:-outline-offset-2 w-[80px]">
                       <PaymentIcon
                         type={watch('flag') as PaymentType}
                         width={24}
@@ -166,7 +175,7 @@ export function Navbar() {
                       />
 
                       <ChevronDownIcon
-                        className="size-4 fill-zinc-50 absolute top-2.5 right-2.5"
+                        className="top-2.5 right-2.5 absolute fill-gray-500 size-4"
                         aria-hidden="true"
                       />
                     </ListboxButton>
@@ -174,13 +183,13 @@ export function Navbar() {
                     <ListboxOptions
                       anchor="bottom"
                       transition
-                      className="z-20 w-40 rounded-lg bg-zinc-700 p-1 [--anchor-gap:var(--spacing-1)] focus:outline-none transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0 mt-2 ms-11"
+                      className="z-20 bg-white data-[leave]:data-[closed]:opacity-0 ms-11 mt-2 p-1 border border-gray-300 rounded-md focus:outline-none w-40 transition duration-100 ease-in [--anchor-gap:var(--spacing-1)]"
                     >
                       {paymentMethods.map(subscription => (
                         <ListboxOption
                           key={subscription.name}
                           value={subscription.icon}
-                          className="flex items-center gap-2 cursor-default rounded-lg p-1.5 select-none focus:bg-zinc-900/50 hover:bg-zinc-900/50"
+                          className="flex items-center gap-2 hover:bg-gray-50 focus:bg-gray-50 p-1.5 rounded-md cursor-default select-none"
                         >
                           <PaymentIcon
                             type={subscription.icon as PaymentType}
@@ -188,7 +197,7 @@ export function Navbar() {
                             height={24}
                           />
 
-                          <span className="text-sm text-zinc-200">
+                          <span className="text-gray-900 text-sm">
                             {subscription.name}
                           </span>
                         </ListboxOption>
@@ -203,21 +212,21 @@ export function Navbar() {
                 placeholder="****"
                 type="number"
                 maxLength={4}
-                className="block w-full rounded-r-lg border-none bg-zinc-700/50 py-1.5 px-3 text-sm/6 text-white focus:outline-2 outline-offset-2 focus:outline-white/25 data-[invalid=true]:outline-2 data-[invalid=true]:outline-red-400"
+                className="block py-1.5 pr-3 pl-1 focus:outline-none min-w-0 text-gray-900 placeholder:text-gray-400 sm:text-sm/6 text-base grow"
                 data-invalid={errors.lastFourDigits ? 'true' : 'false'}
               />
             </div>
 
-            <p className="text-xs text-red-400 mt-2">{errors.flag?.message}</p>
+            <p className="mt-2 text-red-500 text-xs">{errors.flag?.message}</p>
 
-            <p className="text-xs text-red-400 mt-2">
+            <p className="mt-2 text-red-500 text-xs">
               {errors.lastFourDigits?.message}
             </p>
           </Field>
 
           <Button
             type="submit"
-            className="w-full text-center rounded-md transition-colors py-1.5 px-3 text-sm/6 font-semibold text-zinc-50 focus:outline-none bg-zinc-900/60 hover:bg-zinc-950/50 data-[open]:bg-zinc-700 focus:outline-1 focus:outline-white"
+            className="bg-blue-600 data-[open]:bg-blue-700 hover:bg-blue-700 px-3 py-1.5 rounded-md focus:outline-1 focus:outline-none focus:outline-white w-full text-gray-50 text-sm/6 text-center transition-colors"
           >
             Save
           </Button>
